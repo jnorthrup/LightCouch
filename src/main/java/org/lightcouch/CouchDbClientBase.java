@@ -18,6 +18,8 @@ package org.lightcouch;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.*;
@@ -68,15 +70,13 @@ import static org.lightcouch.URIBuilder.builder;
  * @see CouchDbClient
  */
 abstract class CouchDbClientBase {
-
     static final Log log = LogFactory.getLog(CouchDbClientBase.class);
-
+    private final URLCodec urlCodec;
     private HttpClient httpClient;
     private URI baseURI;
     private URI dbURI;
     private Gson gson;
     private CouchDbConfig config;
-
     private HttpHost host;
     private BasicHttpContext context;
 
@@ -86,11 +86,12 @@ abstract class CouchDbClientBase {
 
     protected CouchDbClientBase(CouchDbConfig config) {
         CouchDbProperties props = config.getProperties();
-        this.httpClient = createHttpClient(props);
-        this.gson = initGson(new GsonBuilder());
+        httpClient = createHttpClient(props);
+        gson = initGson(new GsonBuilder());
         this.config = config;
         baseURI = builder().scheme(props.getProtocol()).host(props.getHost()).port(props.getPort()).path("/").build();
         dbURI = builder(baseURI).path(props.getDbName()).path("/").build();
+        urlCodec = new URLCodec();
     }
 
     // ---------------------------------------------- Getters
@@ -317,8 +318,14 @@ abstract class CouchDbClientBase {
                 public void process(
                         final HttpRequest request,
                         final HttpContext context) throws IOException {
-                    if (log.isInfoEnabled())
-                        log.info(">> " + request.getRequestLine());
+                    if (log.isInfoEnabled()) {
+                        RequestLine requestLine = request.getRequestLine();
+                        try {
+                            log.info(">> " + (new StringBuilder()).append(">> ").append(requestLine.getMethod()).append(" ").append(urlCodec.decode(requestLine.getUri())).toString());
+                        } catch (DecoderException e) {
+                            log.error(e, e);
+                        }
+                    }
                 }
             });
             // response interceptor
@@ -439,13 +446,15 @@ abstract class CouchDbClientBase {
                 return json.getAsJsonObject();
             }
         });
-        gsonBuilder.registerTypeAdapter(JsonObject.class, new JsonSerializer<JsonObject>() {
-            public JsonElement serialize(JsonObject src, Type typeOfSrc,
-                                         JsonSerializationContext context) {
-                return src.getAsJsonObject();
-            }
+        gsonBuilder.registerTypeAdapter(JsonObject.class, new
 
-        });
+                JsonSerializer<JsonObject>() {
+                    public JsonElement serialize(JsonObject src, Type typeOfSrc,
+                                                 JsonSerializationContext context) {
+                        return src.getAsJsonObject();
+                    }
+
+                });
         return gsonBuilder.create();
     }
 
