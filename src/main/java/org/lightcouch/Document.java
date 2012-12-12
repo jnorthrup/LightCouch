@@ -16,78 +16,78 @@
 
 package org.lightcouch;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
- * Convenient base class for CouchDB documents, defines the basic 
+ * Convenient base class for CouchDB documents, defines the basic
  * id and revision properties and attachments.
- * @author Ahmed Yehia
  *
+ * @author Ahmed Yehia
  */
 public class Document {
-	
-	@SerializedName("_id")
-	private String id;
-	@SerializedName("_rev")
-	private String revision;
-	@SerializedName("_attachments")
-	private Map<String, Attachment> attachments; 
 
-	public String getId() {
-		return id;
-	}
+    @SerializedName("_id")
+    private String id;
+    @SerializedName("_rev")
+    private String revision;
+    @SerializedName("_attachments")
+    private Map<String, Attachment> attachments;
 
-	public String getRevision() {
-		return revision;
-	}
-	
-	public Map<String, Attachment> getAttachments() {
-		return attachments;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public String getRevision() {
+        return revision;
+    }
 
-	public void setRevision(String revision) {
-		this.revision = revision;
-	}
-	
-	public void setAttachments(Map<String, Attachment> attachments) {
-		this.attachments = attachments;
-	}
-	
-	public void addAttachment(String name, Attachment attachment) {
-		if(attachments == null)
-			attachments = new HashMap<String, Attachment>(); 
-		attachments.put(name, attachment);
-	}
+    public Map<String, Attachment> getAttachments() {
+        return attachments;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Document other = (Document) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
+    public void setRevision(String revision) {
+        this.revision = revision;
+    }
+
+    public void setAttachments(Map<String, Attachment> attachments) {
+        this.attachments = attachments;
+    }
+
+    public void addAttachment(String name, Attachment attachment) {
+        if (attachments == null)
+            attachments = new HashMap<String, Attachment>();
+        attachments.put(name, attachment);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Document other = (Document) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
 }

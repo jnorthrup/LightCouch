@@ -18,141 +18,141 @@ package org.lightcouch;
 
 /**
  * Represents configuration properties for connecting to CouchDB.
- * 
+ *
  * @author Ahmed Yehia
  */
 public class CouchDbProperties {
 
-	// required
-	private String dbName;
-	private boolean createDbIfNotExist;
-	private String protocol;
-	private String host;
-	private int port;
-	private String username;
-	private String password;
+    // required
+    private String dbName;
+    private boolean createDbIfNotExist;
+    private String protocol;
+    private String host;
+    private int port;
+    private String username;
+    private String password;
 
-	// optional 
-	private int socketTimeout;
-	private int connectionTimeout;
-	private int maxConnections;
-	private String proxyHost;
-	private int proxyPort;
+    // optional
+    private int socketTimeout;
+    private int connectionTimeout;
+    private int maxConnections;
+    private String proxyHost;
+    private int proxyPort;
 
-	public CouchDbProperties() {
-		// default constructor
-	}
+    public CouchDbProperties() {
+        // default constructor
+    }
 
-	public CouchDbProperties(String dbName, boolean createDbIfNotExist,
-			String protocol, String host, int port, String username,
-			String password) {
-		this.dbName = dbName;
-		this.createDbIfNotExist = createDbIfNotExist;
-		this.protocol = protocol;
-		this.host = host;
-		this.port = port;
-		this.username = username;
-		this.password = password;
-	}
+    public CouchDbProperties(String dbName, boolean createDbIfNotExist,
+                             String protocol, String host, int port, String username,
+                             String password) {
+        this.dbName = dbName;
+        this.createDbIfNotExist = createDbIfNotExist;
+        this.protocol = protocol;
+        this.host = host;
+        this.port = port;
+        this.username = username;
+        this.password = password;
+    }
 
-	public String getDbName() {
-		return dbName;
-	}
+    public String getDbName() {
+        return dbName;
+    }
 
-	public boolean isCreateDbIfNotExist() {
-		return createDbIfNotExist;
-	}
+    public boolean isCreateDbIfNotExist() {
+        return createDbIfNotExist;
+    }
 
-	public String getProtocol() {
-		return protocol;
-	}
+    public String getProtocol() {
+        return protocol;
+    }
 
-	public String getHost() {
-		return host;
-	}
+    public String getHost() {
+        return host;
+    }
 
-	public int getPort() {
-		return port;
-	}
+    public int getPort() {
+        return port;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public int getSocketTimeout() {
-		return socketTimeout;
-	}
+    public int getSocketTimeout() {
+        return socketTimeout;
+    }
 
-	public int getConnectionTimeout() {
-		return connectionTimeout;
-	}
+    public int getConnectionTimeout() {
+        return connectionTimeout;
+    }
 
-	public int getMaxConnections() {
-		return maxConnections;
-	}
-	
-	public String getProxyHost() {
-		return proxyHost;
-	}
+    public int getMaxConnections() {
+        return maxConnections;
+    }
 
-	public int getProxyPort() {
-		return proxyPort;
-	}
+    public String getProxyHost() {
+        return proxyHost;
+    }
 
-	public void setDbName(String dbName) {
-		this.dbName = dbName;
-	}
+    public int getProxyPort() {
+        return proxyPort;
+    }
 
-	public void setCreateDbIfNotExist(boolean createDbIfNotExist) {
-		this.createDbIfNotExist = createDbIfNotExist;
-	}
+    public void setDbName(String dbName) {
+        this.dbName = dbName;
+    }
 
-	public void setProtocol(String protocol) {
-		this.protocol = protocol;
-	}
+    public void setCreateDbIfNotExist(boolean createDbIfNotExist) {
+        this.createDbIfNotExist = createDbIfNotExist;
+    }
 
-	public void setHost(String host) {
-		this.host = host;
-	}
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
 
-	public void setPort(int port) {
-		this.port = port;
-	}
+    public void setHost(String host) {
+        this.host = host;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setPort(int port) {
+        this.port = port;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setSocketTimeout(int socketTimeout) {
-		this.socketTimeout = socketTimeout;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setConnectionTimeout(int connectionTimeout) {
-		this.connectionTimeout = connectionTimeout;
-	}
+    public void setSocketTimeout(int socketTimeout) {
+        this.socketTimeout = socketTimeout;
+    }
 
-	public void setMaxConnections(int maxConnections) {
-		this.maxConnections = maxConnections;
-	}
-	
-	public void setProxyHost(String proxyHost) {
-		this.proxyHost = proxyHost;
-	}
+    public void setConnectionTimeout(int connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
+    }
 
-	public void setProxyPort(int proxyPort) {
-		this.proxyPort = proxyPort;
-	}
+    public void setMaxConnections(int maxConnections) {
+        this.maxConnections = maxConnections;
+    }
 
-	public void clearPassword() {
-		setPassword("");
-		setPassword(null);
-	}
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public void setProxyPort(int proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public void clearPassword() {
+        setPassword("");
+        setPassword(null);
+    }
 }
